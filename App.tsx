@@ -2,22 +2,30 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack' ;
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Homescreen from './Screens/Homescreen';
-import Profilescreen from './Screens/Profilescreen';
+import Profilescreen from './Screens/Historyscreen';
 import Searchscreen from './Screens/Searchscreen';
-import Addscreen from './Screens/Addscreen'; 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Historyscreen from './Screens/Historyscreen';
 
-
+const Stack = createStackNavigator();
 //basically we need to wrap a navigation contaier inside our main component
 //main component 
 
-const App =() =>{
+const App:React.FC =() =>{
  const Tab = createBottomTabNavigator();
  return(
   <NavigationContainer>
-     <Tab.Navigator
+    <Stack.Navigator
+    initialRouteName='Homescreen'>
+      <Stack.Screen name="Homescreen" component={Homescreen}/>
+      <Stack.Screen name="Historyscreen" component={Historyscreen}/>
+      
+    </Stack.Navigator>
+     
+      <Tab.Navigator
      screenOptions= {({route}) => ({
       tabBarIcon: ({focused, size, color}) => {
         let iconName;
@@ -39,6 +47,8 @@ const App =() =>{
      <Tab.Screen name='Search' component={Searchscreen}/>
   </Tab.Navigator>
   </NavigationContainer>
+
+  
   
  );
 };
